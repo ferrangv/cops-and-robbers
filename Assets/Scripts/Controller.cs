@@ -53,10 +53,47 @@ public class Controller : MonoBehaviour
 
         //TODO: Inicializar matriz a 0's
 
+        for (int i = 0; i < Constants.NumTiles - 1; i++)
+        {
+            for (int j = 0; j < Constants.NumTiles - 1; j++)
+            {
+                matriu[i, j] = 0;
+            }
+        }
+
         //TODO: Para cada posición, rellenar con 1's las casillas adyacentes (arriba, abajo, izquierda y derecha)
 
-        //TODO: Rellenar la lista "adjacency" de cada casilla con los índices de sus casillas adyacentes
+        for (int i = 0; i < Constants.NumTiles - 1; i++)
+        {
+            for (int j = 0; j < Constants.NumTiles - 1; j++)
+            {
 
+                if (System.Math.Abs(i - j) == 1 || System.Math.Abs(i - j) == 8)
+                {
+                    matriu[i, j] = 1;
+                }
+                if (i % 8 == 0 && i - j == 1)
+                {
+                    matriu[i, j] = 0;
+                }
+                if ((i + 1) % 8 == 0 && i - j == -1)
+                {
+                    matriu[i, j] = 0;
+                }
+            }
+        }
+
+        //TODO: Rellenar la lista "adjacency" de cada casilla con los índices de sus casillas adyacentes
+        for (int i = 0; i < Constants.NumTiles - 1; i++)
+        {
+            for (int j = 0; j < Constants.NumTiles - 1; j++)
+            {
+                if (matriu[i, j] == 1)
+                {
+                    tiles[i].adjacency.Add(j);
+                }
+            }
+        }
     }
 
     //Reseteamos cada casilla: color, padre, distancia y visitada
